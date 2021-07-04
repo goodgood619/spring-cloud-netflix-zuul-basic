@@ -1,0 +1,42 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: zuul
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
+
+# Ribbon global settings
+ribbon:
+  retryable: true
+  # Max number of retries on the same server (excluding the first try)
+  MaxAutoRetries: 0
+  # Max number of next servers to retry (excluding the first server)
+  MaxAutoRetriesNextServer: 1
+  # Whether all operations can be retried for this client
+  OkToRetryOnAllOperations: true
+  # Connect timeout used by Apache HttpClient
+  ConnectTimeout: 30000
+  # Read timeout used by Apache HttpClient
+  ReadTimeout: 30000
